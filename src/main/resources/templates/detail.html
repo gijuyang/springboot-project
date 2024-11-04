@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>글 내용 페이지</title>
+    <link rel="stylesheet" href="css/bootstrap.css"
+
+</head>
+<body>
+<div class="container">
+    <table class="table table-striped">
+    <tr>
+        <th>id</th>
+        <td th:text="${board.id}"></td>
+    </tr>
+    <tr>
+        <th>제목</th>
+        <td th:text="${board.boardTitle}"></td>
+    </tr>
+    <tr>
+        <th>작성자</th>
+        <td th:text="${board.boardWriter}"></td>
+    </tr>
+    <tr>
+        <th>날짜</th>
+        <td th:text="${board.createdAt}"></td>
+    </tr>
+    <tr>
+        <th>조회수</th>
+        <td th:text="${board.boardHits}"></td>
+    </tr>
+    <tr>
+        <th>글 내용</th>
+        <td th:text="${board.boardContents}"></td>
+    </tr>
+    <tr th:if="${board.fileAttached == 1}">
+        <th>이미지</th>
+        <td th:each="boardFile: ${boardFileList}">
+            <img th:src="@{|/upload/${boardFile.storedFileName}|}" alt="" width="100" height="100">
+        </td>
+    </tr>
+</table>
+
+<button onclick="listReq()" class="btn btn-success">목록</button>
+<button onclick="updateReq()" class="btn btn-success">수정</button>
+<button onclick="deleteReq()" class="btn btn-success">삭제</button>
+</div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.js"></script>
+</body>
+<script th:inline="javascript">
+    const listReq = () => {
+        location.href = "/list";
+    }
+    const updateReq = () => {
+        location.href = `/update/[[${board.id}]]`;
+    }
+    const deleteReq = () => {
+        location.href = `/delete/[[${board.id}]]`;
+    }
+</script>
+</html>

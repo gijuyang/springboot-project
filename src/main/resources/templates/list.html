@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/bootstrap.css"
+
+<body>
+<div class="container">
+    <table class="table table-striped">
+        <tr>
+         <th>번호</th>
+         <th>제목</th>
+         <th>작성자</th>
+         <th>날짜</th>
+         <th>조회수</th>
+        </tr>
+        <tr th:each="board: ${boardList}">
+         <td th:text="${board.id}"></td>
+         <td>
+             <a th:text="${board.boardTitle}" th:href="@{|/${board.id}|}"></a>
+          </td>
+          <td th:text="${board.boardWriter}"></td>
+          <td th:text="${board.createdAt}"></td>
+          <td th:text="${board.boardHits}"></td>
+        </tr>
+    </table>
+    <a href="/save" class="btn btn-success">글쓰기</a>
+</div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.js"></script>
+</body>
+</html>
